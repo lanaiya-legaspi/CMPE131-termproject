@@ -51,13 +51,29 @@ describe multiple issues that may arise and their outcomes>
 3. ...
 
 ## Use Case #6 (Lanaiya)
-- View Recipe
-- 
+- **View Recipe**
+- **Pre-condition:** User must know name of the recipe to find and view.
+- **Trigger:** User clicks on recipe from Recipes page
+- **Primary Sequence:**
+1. The user locates recipe from the Recipes page Recipes list
+2. User clicks on recipe to view recipe information
+3. System takes user to recipe page
+4. System displays all recipe information on screen
+5. System displays comments/rating
+- **Primary Postconditions:** User views recipe on their screen.
+- **Alternate Sequence**
+1. User cannot locate recipe on Recipes page
+2. User has the option to look for recipe through search bar or filter by recipe type.
+
 
 ## Use Case #7 (Lanaiya)
+- Search Recipe
 
 ## Use Case #8 (Lanaiya)
+- Rate Recipe
 
 ## Use Case #9 (Lanaiya)
+- Comment on Recipe
 
 ## Use Case #10 (Lanaiya)
+- View User Profile
