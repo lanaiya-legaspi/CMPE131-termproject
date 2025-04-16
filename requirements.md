@@ -6,11 +6,11 @@
 3. requirement
 4. requirement
 5. requirement
-6. requirement
-7. requirement
-8. requirement
-9. requirement
-10. requirement
+6. View Recipe - A user can view any recipe on the cite by clicking the recipe name.
+7. Search Recipe - A user can search for any recipe that exists on the cite.
+8. Rate Recipe - A user can give each recipe a rating which will be added to an overall average rating for each recipe.
+9. Comment on Recipe - A user can add a comment and view comments in the Comments section under the recipe information.
+10. View User Profile - A user can view their profile with their account information including ratings and comments.
 11. requirement
 12. requirement
 13. requirement
@@ -50,3 +50,14 @@ describe multiple issues that may arise and their outcomes>
 2. Ut enim ad minim veniam, quis nostrum e
 3. ...
 
+## Use Case #6 (Lanaiya)
+- View Recipe
+- 
+
+## Use Case #7 (Lanaiya)
+
+## Use Case #8 (Lanaiya)
+
+## Use Case #9 (Lanaiya)
+
+## Use Case #10 (Lanaiya)
