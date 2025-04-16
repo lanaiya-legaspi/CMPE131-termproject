@@ -67,10 +67,49 @@ describe multiple issues that may arise and their outcomes>
 
 
 ## Use Case #7 (Lanaiya)
-- Search Recipe
+- **Search Recipe**
+- **Pre-condition:** User must know title of recipe or ingredient keywords.
+- **Trigger:** User clicks on search bar and starts typing.
+- **Primary Sequence**
+1. The user goes to the Recipes page and locates the search bar towards the top.
+2. The user clicks the button to do a search by title or ingredient.
+3. The user clicks the search bar to type.
+4. For each letter entered, the system looks for a related recipe based on search criteria
+5. The system locates the recipe and displays the title in the dropdown as a clickable link.
+6. The user clicks the desired recipe title.
+7. The system takes user to the recipe page that was chosen
+- **Primary Postcondition:** User views recipe on their screen.
+- **Alternate Sequence**
+1. User does not know the title or recipe ingredients.
+2. The user can view a list of recipes under search bar organized by type (Appetizer, Entree, Dessert, Drink)
+3. The user can locate the recipe or a similar one that is available on the website
+- **Alternate Sequence**
+1. The desired recipe does not pop up on the dropdown.
+2. The user has an option to view recipes of a similar type.
+3. The user also has an option to create/add a new recipe.
 
 ## Use Case #8 (Lanaiya)
-- Rate Recipe
+- **Rate Recipe**
+- **Pre-conditions:** User must be logged in and know the recipe they would like to rate.
+- **Trigger:** User clicks on the stars to choose a rating from 1-5.
+- **Primary Sequence**
+1. The user chooses and views a specific recipe.
+2. To the right of the recipe name, the system will display 5 stars.
+3. The user clicks one of the stars to choose a rating.
+4. The system adds the rating to the ratings table.
+5. The system calculates the new average rating for the recipe.
+6. The system displays the new average to the right of the stars.
+7. The system shows the total ratings under the stars.
+- **Primary Postcondition:** User's rating is added to system and overall recipe rating
+- **Alternate Sequence**
+1. The user clicks the wrong star by accident.
+2. The user clicks "Edit Rating" to change their rating.
+3. The system recalculates and displays new rating.
+- **Alternate Sequence**
+1. The user clicks rating by accident, unintentionally.
+2. The user can click "Remove Rating".
+3. The system removes the rating from the table and recalculates
+4. The system displays original rating from before accidental rating.
 
 ## Use Case #9 (Lanaiya)
 - Comment on Recipe
