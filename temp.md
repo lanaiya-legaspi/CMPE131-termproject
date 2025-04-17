@@ -16,7 +16,7 @@
 
 ## Non-functional Requirements
 1. non-functional
-2. non-functional
+2. If the server crashes, users should be able to access cached recipes and their grocery list.
 
 ## Use Case #1 (Gerardo)
 - **User Registration**
@@ -179,3 +179,58 @@
 
 
 ## Use Case #10 (Lanaiya)
+- **View User Profile**
+- **Pre-condition:** User is logged in.
+- **Trigger:** User clicks on their profile picture.
+- **Primary Sequence**
+1. User can be on any page in the website to view their profile picture in the upper right corner.
+2. User clicks on their profile picture.
+3. System verifies account is logged in.
+4. System takes user to their profile page.
+5. System displays user's profile picture, username, email, and submitted recipes.
+- **Primary Post-condition:** User can view all their profile information on their profile page.
+- **Alternate Sequence**
+1. User is not logged in.
+2. Instead of profile picture, the user will see an option to login.
+
+## Make-Your-Own Functional Requirements
+
+### Use Case #11 (Gerardo)
+- **Functional Requirement #1**
+- **Pre-condition:**
+- **Trigger:**
+- **Primary Sequence**
+1. 
+2. 
+3. 
+- **Primary Post-Condition:**
+- **Alternate Sequence**
+1. 
+2. 
+
+### Use Case #12 (Lanaiya)
+- **Grocery List (To-Do Feature)**
+- **Pre-condition:** User is logged in.
+- **Trigger:** User clicks on "My Grocery List" or "Make This Recipe".
+- **Primary Sequence**
+1. User clicks on the "My Grocery List" tab to view their grocery list.
+2. From the grocery list, they can view their items and check it off the list.
+3. System moves item from grocery list to inventory.
+4. System displays grocery list as 2 sections: "Need To Buy" and "In My Cart"
+5. From the Recipe page, user clicks "Make This Recipe"
+6. System asks user how many people they are cooking for.
+7. User enters number and system calculates total list of ingredients needed.
+8. System calculates current inventory and displays ingredients that are available.
+8. System allows user to choose which other items they have in inventory.
+9. System adds the remaining ingredients to the grocery list.
+- **Primary Post-Condition:** User knows which ingredients they need to buy to make a certain recipe.
+- **Alternate Sequence**
+1. User doesn't know how many ingredients and how much they have in stock
+2. System autofills the previous entry so that user can leave page and come back where they left off.
+- **Alternate Sequence**
+1. User is not logged in.
+2. User clicks "My Grocery List".
+3. System asks user to login to view their grocery list.
+4. User clicks "Make This Recipe".
+5. System displays ingredients as a popup form for user to verify what they need to buy.
+6. System advises user to login if they would like to save their grocery list.
