@@ -1,11 +1,11 @@
 ## <remove all of the example text and notes in < > such as this one>
 
 ## Functional Requirements
-1. requirement <should be 1 sentence that describes requirement>
-2. requirement
-3. requirement
-4. requirement
-5. requirement
+1. User Registration - A visitor can create an account by providing a email and password.
+2. User Login - Registered users can log in using their email and password.
+3. User Log out - Logged-in users can log out of their account securely.
+4. Create Recipe - Logged-in users can add new recipes with title, description, ingredients, and instructions
+5. Edit Recipe - Users can update their own recipes after creation
 6. View Recipe - A user can view any recipe on the cite by clicking the recipe name.
 7. Search Recipe - A user can search for any recipe that exists on the cite.
 8. Rate Recipe - A user can give each recipe a rating which will be added to an overall average rating for each recipe.
@@ -49,6 +49,86 @@ describe multiple issues that may arise and their outcomes>
 1. Ut enim ad minim veniam, quis nostrum e
 2. Ut enim ad minim veniam, quis nostrum e
 3. ...
+
+## Use Case #1 (Gerardo)
+- **User Registration**
+- **Pre-condition:** User must not be currently registered in the system
+- **Trigger:** Visitor clicks the "Sign up" button
+- **Primary Sequence:**
+1. Visitor visits the website
+2. Visitor clicks "sign up" button
+3. System displays registration form
+4. Visitor enters name, email, and password
+5. System confirms the inputed data
+6. System stores the users information in the database
+7. System redirects user to login page
+- **Primary Postconditions:** A new user account is created and stored
+- **Alternate Sequence:**
+1. User enters invalid email or password
+2. System displays error message and prevents registration
+
+## Use Case #2 (Gerardo)
+- **User Login**
+- **Pre-condition:** User has previously registered
+- **Trigger:** User clicks the “Login” button and enters email and password
+- **Primary Sequence:**
+1. User clicks on "login" button
+2. System displays login form
+3. User enters email and password
+4. System validates the credentials
+5. System logs in the user and redirects them to homepage
+- **Primary Postconditions:** User is confirmed and granted access to their account
+- **Alternate Sequence**
+1. User enters incorrect email or password
+2. System prompts an error and asks for re-entry
+
+## Use Case #3 (Gerardo)
+- **User Logout**
+- **Pre-condition:** User must be logged into their account
+- **Trigger:** User clicks on "Logout" button
+- **Primary sequence:**
+1. User clicks on the “Logout” option
+2. System clears/ends users session
+3. System redireects user to home/login page
+- **Primary Postcondition:** User is securely logged out
+- **Alternate Sequence:**
+1. User clicks “Logout” but has multiple tabs of the site open
+2. System logs out user from the current tab
+3. When the user interacts with another open tab, the system detects it and redirects them to the login page
+
+## Use Case #4 (Gerardo)
+- **Create Recipe**
+- **Pre-condition:** User must be logged in
+- **Trigger:** User clicks the “Create Recipe” or the "+" button
+- **Primary sequence:** 
+1. User clicks "create Recipe"
+2. System displays the recipe fill out form
+3. User fills in recipe name, description, ingredients, and instructions
+4. User confirms recipe and clicks "done"
+5. System validates and saves the recipe to the database
+6. System redirects user to the new recipe’s page
+- **Primary Postcondition:** New recipe is stored and published
+- **Alternate Sequence:**
+1. User submits incomplete form
+2. System highlights missing section and prevents publication
+
+## Use Case #5 (Gerardo)
+- **Edit Recipe**
+- **Pre-condition:** User is logged in and is the owner of the recipe they wish to edit
+- **Trigger:** User clicks “Edit” on their recipe page
+- **Primary sequence:**
+1. User clicks "My Recipes" tab 
+2. User clicks on recipe they want to edit
+3. User clicks the "edit" button
+4. System displays editable fill out form
+5. User modifies recipe and confirms changes
+6. System validates and saves the changes to the database
+7. System displays the updated recipe
+- **Primary Postcondition:** The recipe is updated with the new information inputed
+- **Alternate Sequence:**
+1. User attempts to edit a recipe that does not belong to them
+2. System denies access and shows an error message
+
 
 ## Use Case #6 (Lanaiya)
 - **View Recipe**
