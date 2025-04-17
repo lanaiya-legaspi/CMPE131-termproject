@@ -112,7 +112,7 @@ describe multiple issues that may arise and their outcomes>
 4. The system displays original rating from before accidental rating.
 
 ## Use Case #9 (Lanaiya)
-- Comment on Recipe
+- **Comment on Recipe**
 - **Pre-condition:** User is logged in and on a specific recipe page.
 - **Trigger:** User clicks the "Add comment" button.
 - **Primary Sequence:** 
@@ -120,12 +120,14 @@ describe multiple issues that may arise and their outcomes>
 2. User scrolls down to the Comments section.
 3. User enters their comment in the text box provided.
 4. User clicks the "Add comment" button.
-5. System checks the word count to verify it is less than 250 words.
+5. System checks the word count to verify it is less than 1000 characters.
 6. System grabs the timestamp and username.
 7. System adds the comment with username and timestamp below the recipe section.
 - **Primary Postcondition:** User's comment is added to recipe page.
 - **Alternate Sequence**
-1. 
+1. User enters more than 1000 characters and clicks enter.
+2. An error line appears saying "Maximum number of characters reached."
+3. System places tick in document to allow user to automatically reduce character count.
+
 
 ## Use Case #10 (Lanaiya)
-- View User Profile
