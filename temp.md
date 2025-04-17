@@ -15,7 +15,7 @@
 <using the syntax [](images/ui1.png) add images in a folder called images/ and place sketches of your webpages>
 
 ## Non-functional Requirements
-1. non-functional
+1. Responsive design: The system must support responsive design and display correctly on a variety of screen sizes, including phones, tablets, and desktop browsers.
 2. If the server crashes, users should be able to access cached recipes and their grocery list.
 
 ## Use Case #1 (Gerardo)
@@ -196,17 +196,21 @@
 ## Make-Your-Own Functional Requirements
 
 ### Use Case #11 (Gerardo)
-- **Functional Requirement #1**
-- **Pre-condition:**
-- **Trigger:**
+- **Share Recipe**
+- **Pre-condition:** User is viewing a recipe page
+- **Trigger:** User clicks the "share" button
 - **Primary Sequence**
-1. 
-2. 
-3. 
-- **Primary Post-Condition:**
+1. User clicks on recipe they want to share
+2. User clicks the 3 dots for more options
+3. User clicks the "Share" button
+4. System generates a shareable link for the recipe
+5. System displays different sharing options, e.g., copy link, share to X, Instagram, Snapchat
+6. User selects sharing option
+7. System confirms selected option
+- **Primary Post-Condition:** A shareable link is generated
 - **Alternate Sequence**
-1. 
-2. 
+1. A network error occurs during link generation
+2. System displays an error message: “Unable to generate share link. Please try again later”
 
 ### Use Case #12 (Lanaiya)
 - **Grocery List (To-Do Feature)**
