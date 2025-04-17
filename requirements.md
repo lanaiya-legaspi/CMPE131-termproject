@@ -113,6 +113,19 @@ describe multiple issues that may arise and their outcomes>
 
 ## Use Case #9 (Lanaiya)
 - Comment on Recipe
+- **Pre-condition:** User is logged in and on a specific recipe page.
+- **Trigger:** User clicks the "Add comment" button.
+- **Primary Sequence:** 
+1. User clicks on a recipe to go to the specific recipe page.
+2. User scrolls down to the Comments section.
+3. User enters their comment in the text box provided.
+4. User clicks the "Add comment" button.
+5. System checks the word count to verify it is less than 250 words.
+6. System grabs the timestamp and username.
+7. System adds the comment with username and timestamp below the recipe section.
+- **Primary Postcondition:** User's comment is added to recipe page.
+- **Alternate Sequence**
+1. 
 
 ## Use Case #10 (Lanaiya)
 - View User Profile
