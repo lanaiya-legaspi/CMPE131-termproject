@@ -11,10 +11,10 @@
 10. View User Profile - A user can view their profile with their account information including ratings and comments.
 
 <using the syntax [](images/ui1.png) add images in a folder called images/ and place sketches of your webpages>
-[](images/home.jpg)
-[](images/recipes.jpg)
-[](images/recipe-x.jpg)
-[](images/user-x)
+![](images/home.jpg)
+![](images/recipes.jpg)
+![](images/recipe-x.jpg)
+![](images/user-x.jpg)
 
 ## Non-functional Requirements
 1. Responsive design: The system must support responsive design and display correctly on a variety of screen sizes, including phones, tablets, and desktop browsers.
