@@ -17,3 +17,7 @@ def recipeX():
 @myapp_obj.route("/grocery-list")
 def grocery_list():
 	return render_template("grocery-list.html")
+
+@myapp_obj.route("/user")
+def user_profile():
+	return render_template("user.html")
