@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block header %}
+	<h1>{% block title %}Recipe Name{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+		<br><br>
+		<h1>Recipe Ingredients</h1>
+		<table class="table">
+		<thead><tr>
+		<th scope="col">#</th>
+		<th scope="col">Ingredients</th>
+		<th scope="col">Quantity</th>
+		</tr></thead>
+		<tbody>
+		<tr><th scope="row">1</th>
+		<td>Ing 1</td>
+		<td>Qty 1</td></tr>
+		<tr><th scope="row">2</th>
+		<td>Ing 2</td>
+		<td>Qty 2</td></tr>
+		<tr><th scope="row">3</th>
+		<td>Ing 3</td>
+		<td>Qty 3</td></tr>
+		</tbody>
+		</table><br><br>
+		<h1>Recipe Instructions</h1>
+		<ol class="list-group list-group-numbered list-group-flush">
+		<li class="list-group-item">Instruction 1</li>
+		<li class="list-group-item">Instruction 2</li>
+		<li class="list-group-item">Instruction 3</li>
+		<li class="list-group-item">Instruction 4</li>
+		<li class="list-group-item">Instruction 5</li>
+		<li class="list-group-item">Instruction 6</li>
+		<li class="list-group-item">Instruction 7</li>
+		</ol>
+{% endblock %}
