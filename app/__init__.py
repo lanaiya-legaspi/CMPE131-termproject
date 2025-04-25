@@ -1,5 +1,5 @@
 from flask import Flask
-#from flask_sqlalchemy import SQLAlchemy
+from flask_sqlalchemy import SQLAlchemy
 import os
 
 myapp_obj = Flask(__name__)
@@ -13,6 +13,6 @@ myapp_obj.config.from_mapping(
 
 myapp_obj.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-#db = SQLAlchemy(myapp_obj)
+db = SQLAlchemy(myapp_obj)
 
 from app import routes, models
