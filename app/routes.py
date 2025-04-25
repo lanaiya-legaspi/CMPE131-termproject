@@ -18,6 +18,85 @@ def recipeX():
 def grocery_list():
 	return render_template("grocery-list.html")
 
+from flask import session
+from app.models import User  
+
 @myapp_obj.route("/user")
 def user_profile():
-	return render_template("user.html")
+    user_email = session.get("user")
+    user = User.query.filter_by(email=user_email).first()
+    return render_template("user.html", user=user)
+
+
+#For the login page
+
+from app.models import User
+from flask import request, redirect, url_for, session, render_template
+
+@myapp_obj.route("/login", methods=["GET", "POST"])
+def login():
+    error = None
+    if request.method == "POST":
+        email = request.form["email"]
+        password = request.form["password"]
+
+        # Look up user in the database
+        user = User.query.filter_by(email=email).first()
+
+        if user and user.password == password:
+            session["user"] = user.email
+            return redirect(url_for("user_profile"))
+        else:
+            error = "Invalid email or password."
+
+    return render_template("login.html", error=error)
+
+#For the register page
+
+from app.models import User
+from app import db
+
+@myapp_obj.route("/register", methods=["GET", "POST"])
+def register():
+    error = None
+    success = None
+
+    if request.method == "POST":
+        print("FORM DATA:", request.form)
+        first_name = request.form["first_name"]
+        last_name = request.form["last_name"]
+        dob = request.form["dob"]
+        email = request.form["email"]
+        password = request.form["password"]
+        confirm = request.form["confirm_password"]
+
+        existing_user = User.query.filter_by(email=email).first()
+
+        if existing_user:
+            error = "Account already exists."
+        elif password != confirm:
+            error = "Passwords do not match."
+        else:
+            new_user = User(
+                first_name=first_name,
+                last_name=last_name,
+                dob=dob,
+                email=email,
+                password=password
+            )
+            db.session.add(new_user)
+            db.session.commit()
+            success = "Account created! You can now log in."
+
+    return render_template("register.html", error=error, success=success)
+
+
+@myapp_obj.route("/logout")
+def logout():
+    session.pop("user", None)
+    return redirect(url_for("login"))
+
+
+
+
+

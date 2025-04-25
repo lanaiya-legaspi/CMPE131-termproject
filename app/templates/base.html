@@ -9,7 +9,12 @@
 <a class="navbar-brand" href="/">Recipes</a>
 <a class="navbar-brand" href="/grocery-list">My Grocery List</a>
 <a class="navbar-brand" href="/user">My Profile</a>
-<a class="navbar-brand" href="/">Login/Logout</a>
+{% if session.get("user") %}
+    <a href="{{ url_for('logout') }}" class="nav-link">Logout</a>
+{% else %}
+    <a href="{{ url_for('login') }}" class="nav-link">Login</a>
+{% endif %}
+<a href="{{ url_for('register') }}" class="nav-link">Register</a>
 <a class="navbar-brand" href="/">[Logo]</a>
 </div>
 </nav>
