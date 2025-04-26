@@ -2,14 +2,15 @@
 - Gerardo Robles (@Gerardorobles8)
 - Lanaiya Wu (@lanaiya-legaspi)
 
-# Requirments Implemented
-# Gerardo Robles 1-3
+# Functional Requirments Implemented
+## Gerardo Robles 1-3
 1. User Registration
 2. User Login
 3. User Log out
-
-
-
+## Lanaiya Wu 6-8
+6. View Recipe
+7. Rate Recipe
+8. Comment Recipe
 
 # Ethical Implications:
 
