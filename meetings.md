@@ -28,3 +28,18 @@
 - **We Will Complete**
 - We will each do one make-your-own functional requirement.
 - We will each do one non-functional requirement.
+
+### 2025-04-25 at 8:00pm via Discord Voice Call
+- **We Completed**
+- Gerardo completed 3 functional requirements (Use Cases #1-3)
+- Gerardo edited README.md for functional requirements completed
+- Gerardo completed ethical implications part 2
+- Lanaiya completed templates for 3 functional requirements (Use Cases #6-8) and partial functionality
+- Lanaiya completed ethical implication part 1
+- Lanaiya edited README.md and meetings.md for instructions and meeting updates
+- **We Discussed**
+- Remaining action items for Milestone #2
+- Bootstrap styling to be worked on more in next milestone
+- **We Will Complete**
+- Lanaiya to complete functionality for all 3 Use Cases #6-8
+
