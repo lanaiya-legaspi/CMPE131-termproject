@@ -18,22 +18,22 @@
 
 		<!-- Recipe Ingredients -->
 		<h1>Recipe Ingredients</h1>
+
+		<!-- Header Row -->
 		<table class="table">
 		<thead><tr>
 		<th scope="col">#</th>
 		<th scope="col">Ingredients</th>
 		<th scope="col">Quantity</th>
 		</tr></thead>
+		
+		<!-- Table Body -->
 		<tbody>
-		<tr><th scope="row">1</th>
-		<td>Ing 1</td>
-		<td>Qty 1</td></tr>
-		<tr><th scope="row">2</th>
-		<td>Ing 2</td>
-		<td>Qty 2</td></tr>
-		<tr><th scope="row">3</th>
-		<td>Ing 3</td>
-		<td>Qty 3</td></tr>
+		{% for qty in qtys %}
+		<tr><th scope="row">{{loop.index}}</th>
+		<td>{{ing_descs[loop.index]}}</td>
+		<td>{{qty.ing_qty}} {{qty.ing_uom}}</td></tr>
+		{% endfor %}
 		</tbody>
 		</table><br><br>
 
