@@ -15,4 +15,4 @@ myapp_obj.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(myapp_obj)
 
-from app import routes, models
+from app import routes, models, forms

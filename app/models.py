@@ -21,6 +21,9 @@ class Recipe(db.Model):
 	recipe_rating = db.Column(db.Integer)
 	recipe_insns = db.Column(db.String(1000))
 
+	def __repr__(self):
+		return f'<Recipe: {self.recipe_desc}>'
+
 class Ingredient(db.Model):
 	__tablename__ = 'ingredients'
 	ing_id = db.Column(db.Integer, primary_key=True)

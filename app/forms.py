@@ -1,0 +1,10 @@
+from flask_wtf import FlaskForm
+from wtforms import StringField, SubmitField, validators, HiddenField
+
+class RecipeForm(FlaskForm):
+	recipe_id = HiddenField()
+	recipe_desc = StringField('RECIPE DESCRIPTION', [validators.DataRequired()])
+	recipe_type = StringField('Recipe Type', [validators.DataRequired()])
+#	recipe_servings = IntegerField('Recipe Servings', [validators.DataRequired()])
+#	recipe_rating = IntegerField('Recipe Rating', [validators.Length(min=1, max=1)])
+	recipe_insns = StringField('RECIPE INSTRUCTIONS', [validators.DataRequired()])

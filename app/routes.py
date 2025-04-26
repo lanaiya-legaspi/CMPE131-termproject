@@ -1,10 +1,12 @@
 from flask import Flask, render_template
-from app import myapp_obj
+from app import myapp_obj, db
+from app.models import Recipe
 
 @myapp_obj.route("/")
 @myapp_obj.route("/home")
 def main():
-	return render_template("index.html")
+	recipes = Recipe.query.all()
+	return render_template("index.html", recipes=recipes)
 
 @myapp_obj.route("/recipes")
 def recipes():
@@ -19,7 +21,7 @@ def grocery_list():
 	return render_template("grocery-list.html")
 
 from flask import session
-from app.models import User  
+from app.models import User
 
 @myapp_obj.route("/user")
 def user_profile():
