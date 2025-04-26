@@ -1,11 +1,18 @@
 {% extends 'base.html' %}
 
 {% block header %}
-	<h1>{% block title %}Recipe Name{% endblock %}</h1>
+	<br>
+	<h1>{% block title %}{{recipe.recipe_desc}}{% endblock %}</h1>
 {% endblock %}
 
 {% block content %}
 		<br><br>
+		<div class="container text-center">
+		<div class="row">
+		<div class="col"><h3>Servings: {{recipe.recipe_servings}}</h3></div>
+		<div class="col"><h3>Overall Rating: {{recipe.recipe_rating}}</h3></div>
+		</div></div>
+
 		<h1>Recipe Ingredients</h1>
 		<table class="table">
 		<thead><tr>
@@ -27,12 +34,45 @@
 		</table><br><br>
 		<h1>Recipe Instructions</h1>
 		<ol class="list-group list-group-numbered list-group-flush">
-		<li class="list-group-item">Instruction 1</li>
-		<li class="list-group-item">Instruction 2</li>
-		<li class="list-group-item">Instruction 3</li>
-		<li class="list-group-item">Instruction 4</li>
-		<li class="list-group-item">Instruction 5</li>
-		<li class="list-group-item">Instruction 6</li>
-		<li class="list-group-item">Instruction 7</li>
+		{% for insn in recipe_insns %}
+		<li class="list-group-item">{{insn}}</li>		
+		{% endfor %}
 		</ol>
+
+		<br><br>
+		<h1>Rate This Recipe</h1>
+		<form>
+		<div class="form-check">
+  		<input class="form-check-input" type="radio" name="radioDefault" id="radioDefault5">
+  		<label class="form-check-label" for="radioDefault5">5 Star</label>
+		</div>
+		<div class="form-check">
+		<input class="form-check-input" type="radio" name="radioDefault" id="radioDefault4">
+		<label class="form-check-label" for="radioDefault4">4 Star</label>
+		</div>
+		<div class="form-check">
+		<input class="form-check-input" type="radio" name="radioDefault" id="radioDefault3">
+		<label class="form-check-label" for="radioDefault3">3 Star</label>
+		</div>
+		<div class="form-check">
+		<input class="form-check-input" type="radio" name="radioDefault" id="radioDefault2">
+		<label class="form-check-label" for="radioDefault2">2 Star</label>
+		</div>
+		<div class="form-check">
+		<input class="form-check-input" type="radio" name="radioDefault" id="radioDefault1">
+		<label class="form-check-label" for="radioDefault1">1 Star</label>
+		</div>
+		<br>
+		<button type="submit" class="btn btn-primary">Rate Recipe</button>
+		</form>
+
+		<br><br>
+		<h1>Comment On This Recipe</h1>
+		<form>
+		<div class="mb-3">
+		<input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+		<button type="submit" class="btn btn-primary">Submit</button>
+		</form>
+		
+
 {% endblock %}

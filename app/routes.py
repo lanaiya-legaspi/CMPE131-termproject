@@ -12,9 +12,11 @@ def main():
 def recipes():
 	return render_template("recipes.html")
 
-@myapp_obj.route("/recipe")
-def recipeX():
-	return render_template("recipe.html")
+@myapp_obj.route("/recipe-<id>")
+def recipeX(id):
+	recipe = db.session.get(Recipe, id)
+	recipe_insns = ['step1', 'step2', 'step3']
+	return render_template("recipe.html", recipe=recipe, recipe_insns=recipe_insns)
 
 @myapp_obj.route("/grocery-list")
 def grocery_list():
