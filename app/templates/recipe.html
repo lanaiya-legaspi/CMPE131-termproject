@@ -41,7 +41,7 @@
 
 		<br><br>
 		<h1>Rate This Recipe</h1>
-		<form>
+		<form method="POST" action="/">
 		<div class="form-check">
   		<input class="form-check-input" type="radio" name="radioDefault" id="radioDefault5">
   		<label class="form-check-label" for="radioDefault5">5 Star</label>
@@ -70,8 +70,9 @@
 		<h1>Comment On This Recipe</h1>
 		<form>
 		<div class="mb-3">
-		<input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-		<button type="submit" class="btn btn-primary">Submit</button>
+		<textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+		<button type="submit" class="btn btn-primary">Comment</button>
+		</div>
 		</form>
 		
 

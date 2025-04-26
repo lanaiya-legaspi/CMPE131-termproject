@@ -8,3 +8,11 @@ class RecipeForm(FlaskForm):
 #	recipe_servings = IntegerField('Recipe Servings', [validators.DataRequired()])
 #	recipe_rating = IntegerField('Recipe Rating', [validators.Length(min=1, max=1)])
 	recipe_insns = StringField('RECIPE INSTRUCTIONS', [validators.DataRequired()])
+
+class CommentsForm(FlaskForm):
+	comment_id = HiddenField()
+	comment_desc = StringField('COMMENT', [validators.DataRequired()])
+	submit = SubmitField('Comment')
+
+class RatingsForm(FlaskForm):
+	rating_id = HiddenField()

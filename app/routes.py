@@ -1,6 +1,8 @@
 from flask import Flask, render_template
+from datetime import datetime
 from app import myapp_obj, db
 from app.models import Recipe
+from app.forms import RatingsForm, CommentsForm
 
 @myapp_obj.route("/")
 @myapp_obj.route("/home")
@@ -16,7 +18,22 @@ def recipes():
 def recipeX(id):
 	recipe = db.session.get(Recipe, id)
 	recipe_insns = ['step1', 'step2', 'step3']
-	return render_template("recipe.html", recipe=recipe, recipe_insns=recipe_insns)
+	rform = RatingsForm()
+	cform = CommentsForm()
+	if(cform.validate_on_submit()):
+		cmt_tmstp = str(datetime.now())
+		comment =  Recipe_Comment(comment_desc=form.comment_desc.data,user_id=1,recipe_id=id,comment_tmstp=cmt_tmstp)
+		db.session.add(comment)
+		db.session.commit()
+		print(f'Comment has been added!')
+		return redirect("/")
+	else:
+		print("Comments Form Error")
+	if(rform.validate_on_submit()):
+		return redirect("/")
+	else:
+		print("Ratings Form Error")
+	return render_template("recipe.html", recipe=recipe, recipe_insns=recipe_insns, form=cform, rform=rform)
 
 @myapp_obj.route("/grocery-list")
 def grocery_list():
