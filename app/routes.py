@@ -1,26 +1,30 @@
+#imports
 from flask import Flask, render_template
 from datetime import datetime
 from app import myapp_obj, db
 from app.models import Recipe
 from app.forms import RatingsForm, CommentsForm
 
+# home page / recipe search page
 @myapp_obj.route("/")
 @myapp_obj.route("/home")
 def main():
-	recipes = Recipe.query.all()
+	recipes = Recipe.query.all() # pull all recipes from db
 	return render_template("index.html", recipes=recipes)
 
+# recipes page
 @myapp_obj.route("/recipes")
 def recipes():
 	return render_template("recipes.html")
 
+# recipe page
 @myapp_obj.route("/recipe-<id>")
 def recipeX(id):
 	recipe = db.session.get(Recipe, id)
-	recipe_insns = ['step1', 'step2', 'step3']
+	recipe_insns = ['step1', 'step2', 'step3'] # insns to be parsed soon
 	rform = RatingsForm()
 	cform = CommentsForm()
-	if(cform.validate_on_submit()):
+	if(cform.validate_on_submit()): # comments form validation / db submission
 		cmt_tmstp = str(datetime.now())
 		comment =  Recipe_Comment(comment_desc=form.comment_desc.data,user_id=1,recipe_id=id,comment_tmstp=cmt_tmstp)
 		db.session.add(comment)
@@ -29,12 +33,13 @@ def recipeX(id):
 		return redirect("/")
 	else:
 		print("Comments Form Error")
-	if(rform.validate_on_submit()):
+	if(rform.validate_on_submit()): # ratings form validation / db submission
 		return redirect("/")
 	else:
 		print("Ratings Form Error")
 	return render_template("recipe.html", recipe=recipe, recipe_insns=recipe_insns, form=cform, rform=rform)
 
+# my grocery list page
 @myapp_obj.route("/grocery-list")
 def grocery_list():
 	return render_template("grocery-list.html")

@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
 
+<!-- Browser tab and page title -->
 {% block header %}
 	<br><br><br><br>
 	<h1 class="text-center">{% block title %}Recipe Search{% endblock %}</h1>
 {% endblock %}
 
-	
+<!-- Beginning of Body -->
 {% block content %}
 
 <br><br><br><br>
@@ -23,7 +24,7 @@
 <br><br><br>
 <h2>RECIPES</h2>
 
-
+<!-- List of Available Recipes from db -->
 <div class="list-group">
 {% for recipe in recipes %}
   <a href="/recipe-{{recipe.recipe_id}}" class="list-group-item list-group-item-action">{{recipe.recipe_desc}}</a>
@@ -32,3 +33,4 @@
 
 
 {% endblock %}
+<!-- End of Body -->

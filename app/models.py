@@ -1,5 +1,7 @@
+#imports
 from app import db
 
+# Users
 class User(db.Model):
     __tablename__ = 'users'
     user_id = db.Column(db.Integer, primary_key=True)
@@ -12,6 +14,7 @@ class User(db.Model):
     def __repr__(self):
         return f'<User {self.email}>'
 
+# Recipes
 class Recipe(db.Model):
 	__tablename__ = 'recipes'
 	recipe_id = db.Column(db.Integer, primary_key=True)
@@ -24,12 +27,14 @@ class Recipe(db.Model):
 	def __repr__(self):
 		return f'<Recipe: {self.recipe_desc}>'
 
+# Ingredients
 class Ingredient(db.Model):
 	__tablename__ = 'ingredients'
 	ing_id = db.Column(db.Integer, primary_key=True)
 	ing_desc = db.Column(db.String(200))
 	ing_type = db.Column(db.String(30))
 
+# Ingredients for each Recipe
 class Recipe_Ingredient(db.Model):
 	__tablename__ = 'recipe_ingredients'
 	recing_id = db.Column(db.Integer, primary_key=True)
@@ -38,6 +43,7 @@ class Recipe_Ingredient(db.Model):
 	ing_qty = db.Column(db.Double)
 	ing_uom = db.Column(db.String(10))
 
+# Comments for each Recipe
 class Recipe_Comment(db.Model):
 	__tablename__ = 'recipe_comments'
 	comment_id = db.Column(db.Integer, primary_key=True)
@@ -46,6 +52,7 @@ class Recipe_Comment(db.Model):
 	recipe_id = db.Column(db.Integer, db.ForeignKey('recipes.recipe_id'))
 	comment_tmstp = db.Column(db.DateTime)
 
+# Ratings for each Recipe
 class Recipe_Rating(db.Model):
 	__tablename__ = 'recipe_ratings'
 	rating_id = db.Column(db.Integer, primary_key=True)

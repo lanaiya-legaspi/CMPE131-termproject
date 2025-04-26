@@ -1,18 +1,22 @@
 {% extends 'base.html' %}
 
+<!-- Browser tab title and page title -->
 {% block header %}
 	<br>
 	<h1>{% block title %}{{recipe.recipe_desc}}{% endblock %}</h1>
 {% endblock %}
 
+<!-- Beginning of Body -->
 {% block content %}
 		<br><br>
+		<!-- Bootstrap Grid used for Recipe Servings and Ratings -->
 		<div class="container text-center">
 		<div class="row">
 		<div class="col"><h3>Servings: {{recipe.recipe_servings}}</h3></div>
 		<div class="col"><h3>Overall Rating: {{recipe.recipe_rating}}</h3></div>
 		</div></div>
 
+		<!-- Recipe Ingredients -->
 		<h1>Recipe Ingredients</h1>
 		<table class="table">
 		<thead><tr>
@@ -32,14 +36,18 @@
 		<td>Qty 3</td></tr>
 		</tbody>
 		</table><br><br>
+
+		<!-- Recipe Instructions -->
 		<h1>Recipe Instructions</h1>
 		<ol class="list-group list-group-numbered list-group-flush">
+		<!-- Print parsed instructions as a list -->
 		{% for insn in recipe_insns %}
 		<li class="list-group-item">{{insn}}</li>		
 		{% endfor %}
 		</ol>
 
 		<br><br>
+		<!-- Rate Recipe -->
 		<h1>Rate This Recipe</h1>
 		<form method="POST" action="/">
 		<div class="form-check">
@@ -67,6 +75,7 @@
 		</form>
 
 		<br><br>
+		<!-- Comment Recipe -->
 		<h1>Comment On This Recipe</h1>
 		<form>
 		<div class="mb-3">
