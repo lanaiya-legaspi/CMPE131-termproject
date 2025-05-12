@@ -2,7 +2,7 @@
 from flask import Flask, render_template
 from datetime import datetime
 from app import myapp_obj, db
-from app.models import Recipe, Recipe_Ingredient, Recipe_Rating
+from app.models import Recipe, Recipe_Ingredient, Recipe_Rating, Ingredient
 from app.forms import RatingsForm, CommentsForm
 
 # home page / recipe search page
@@ -21,9 +21,9 @@ def recipes():
 @myapp_obj.route("/recipe-<id>", methods=['GET', 'POST'])
 def recipeX(id):
 	recipe = db.session.get(Recipe, id)
-	ing_descs = get_Ing_Descs(id)
+	ing_descs = getIngDescs(id)
 	recipe_qtys = Recipe_Ingredient.query.filter(Recipe_Ingredient.recipe_id==id).all()
-	recipe_insns = ['step1', 'step2', 'step3'] # insns to be parsed soon
+	recipe_insns = parseInstructions(id)
 	recform = Recipe
 	rform = RatingsForm()
 	cform = CommentsForm()
@@ -154,8 +154,19 @@ def logout():
 
 
 # routing definitions
-def get_Ing_Descs(id):
-	ingredients = Recipe_Ingredient.query.all()
+def getIngDescs(id):
 	descs = []
-	recipe_ings = Recipe_Ingredient.query.filter(Recipe_Ingredient.recipe_id==id).all()
-	
+	recipe_ings = Ingredient.query.filter(Ingredient.ing_id==Recipe_Ingredient.ing_id, Recipe_Ingredient.recipe_id==id).all()
+	for row in recipe_ings:
+		descs.append(row.ing_desc)
+	return descs
+
+def parseInstructions(id):
+	insns = []
+	rec_insns = db.session.query(Recipe.recipe_insns).filter(Recipe.recipe_id==id)
+	i=0
+	for ins in rec_insns:
+		while i < 10:
+			insn = ins[0].split(".")
+			i=i+1
+	return insn
