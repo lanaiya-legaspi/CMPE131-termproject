@@ -6,10 +6,15 @@ from app.models import Recipe, Recipe_Ingredient, Recipe_Rating, Ingredient
 from app.forms import RatingsForm, CommentsForm
 
 # home page / recipe search page
-@myapp_obj.route("/")
-@myapp_obj.route("/home")
+@myapp_obj.route("/", methods=["GET","POST"])
+@myapp_obj.route("/home", methods=["GET","POST"])
 def main():
 	recipes = Recipe.query.all() # pull all recipes from db
+	if sform.validate_on_submit(): # search form validation
+		#get form data and store as recipe_desc
+		#get id from db
+		#redirect to the specified recipe page
+		return redirect("/")
 	return render_template("index.html", recipes=recipes)
 
 # recipes page
