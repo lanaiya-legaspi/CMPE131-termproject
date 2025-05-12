@@ -2,14 +2,20 @@
 from flask import Flask, render_template
 from datetime import datetime
 from app import myapp_obj, db
-from app.models import Recipe, Recipe_Ingredient, Recipe_Rating, Recipe_Comment, Ingredient
-from app.forms import RatingsForm, CommentsForm
+from app.models import Recipe, Recipe_Ingredient, Recipe_Rating, Ingredient, Recipe_Comment, Ingredient
+from app.forms import RatingsForm, CommentsForm, SearchForm
 
 # home page / recipe search page
-@myapp_obj.route("/")
-@myapp_obj.route("/home")
+@myapp_obj.route("/", methods=["GET","POST"])
+@myapp_obj.route("/home", methods=["GET","POST"])
 def main():
 	recipes = Recipe.query.all() # pull all recipes from db
+	sform = SearchForm()  # Define the search form
+	if sform.validate_on_submit(): # search form validation
+		#get form data and store as recipe_desc
+		#get id from db
+		#redirect to the specified recipe page
+		return redirect("/")
 	return render_template("index.html", recipes=recipes)
 
 # recipes page
@@ -21,9 +27,16 @@ def recipes():
 @myapp_obj.route("/recipe-<id>", methods=['GET', 'POST'])
 def recipeX(id):
 	recipe = db.session.get(Recipe, id)
-	ing_descs = get_Ing_Descs(id)
+	ing_descs = getIngDescs(id)
 	recipe_qtys = Recipe_Ingredient.query.filter(Recipe_Ingredient.recipe_id==id).all()
-	recipe_insns = ['step1', 'step2', 'step3'] # insns to be parsed soon
+	recipe_insns = parseInstructions(id)
+	
+	def parseInstructions(id):
+		# Placeholder implementation for parsing instructions
+		recipe = db.session.get(Recipe, id)
+		if recipe and recipe.instructions:
+			return recipe.instructions.split("\n")  # Assuming instructions are stored as newline-separated text
+		return []
 	recform = Recipe
 	rform = RatingsForm()
 	cform = CommentsForm()
@@ -154,81 +167,7 @@ def logout():
 
 
 # routing definitions
-def get_Ing_Descs(id):
-	ingredients = Recipe_Ingredient.query.all()
+def getIngDescs(id):
 	descs = []
 	recipe_ings = Recipe_Ingredient.query.filter(Recipe_Ingredient.recipe_id==id).all()
-      
-# Adding a Recipe
-@myapp_obj.route("/add-recipe", methods=["GET", "POST"])
-def add_recipe():
-    if request.method == "POST":
-        title = request.form["recipe_desc"]
-        recipe_type = request.form["recipe_type"]
-        servings = request.form["recipe_servings"]
-        instructions_raw = request.form["recipe_instructions"]
-        ingredients_raw = request.form["ingredients"]
-
-        # Save recipe to database
-        new_recipe = Recipe(
-            recipe_desc=title,
-            recipe_type=recipe_type,
-            recipe_servings=servings,
-            recipe_rating=0,  # default rating
-            recipe_insns=instructions_raw
-        )
-        db.session.add(new_recipe)
-        db.session.commit()
-
-        # Add ingredients
-        ingredients_lines = ingredients_raw.strip().split("\n")
-        for line in ingredients_lines:
-            parts = line.strip().split(" ", 2)
-            if len(parts) == 3:
-                qty, uom, name = parts
-            elif len(parts) == 2:
-                qty, name = parts
-                uom = "unit"
-            else:
-                continue  # skip malformed line
-
-            # Check if ingredient exists
-            ingredient = Ingredient.query.filter_by(ing_desc=name).first()
-            if not ingredient:
-                ingredient = Ingredient(ing_desc=name, ing_type="")
-                db.session.add(ingredient)
-                db.session.commit()
-
-            # Link recipe and ingredient
-            ri = Recipe_Ingredient(
-                recipe_id=new_recipe.recipe_id,
-                ing_id=ingredient.ing_id,
-                ing_qty=qty,
-                ing_uom=uom
-            )
-            db.session.add(ri)
-
-        db.session.commit()
-        return redirect(url_for("main"))
-
-    return render_template("add_recipe.html")
-
-#ediiting a recipe
-@myapp_obj.route("/edit-recipe/<int:id>", methods=["GET", "POST"])
-def edit_recipe(id):
-    recipe = Recipe.query.get_or_404(id)
-
-    if request.method == "POST":
-        recipe.recipe_desc = request.form["recipe_desc"]
-        recipe.recipe_type = request.form["recipe_type"]
-        recipe.recipe_servings = request.form["recipe_servings"]
-        recipe.recipe_insns = request.form["recipe_insns"]
-
-        db.session.commit()
-        return redirect(url_for("recipeX", id=recipe.recipe_id))
-
-    return render_template("edit_recipe.html", recipe=recipe)
-
-
-
 	
