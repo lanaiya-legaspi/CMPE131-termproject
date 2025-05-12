@@ -4,6 +4,25 @@
 {% block header %}
 	<br>
 	<h1>{% block title %}{{recipe.recipe_desc}}{% endblock %}</h1>
+	<a href="{{ url_for('edit_recipe', id=recipe.recipe_id) }}" class="btn btn-warning">
+    Edit Recipe
+</a>
+	<a href="#" class="btn btn-info" onclick="copyShareLink()">Share</a>
+	<!-- Social Share Buttons (Visual Placeholders) -->
+<div class="mt-2">
+  <a href="#" class="btn btn-outline-primary btn-sm me-1">
+    <i class="fab fa-facebook-f"></i>
+  </a>
+  <a href="#" class="btn btn-outline-info btn-sm me-1">
+    <i class="fab fa-twitter"></i>
+  </a>
+  <a href="#" class="btn btn-outline-danger btn-sm me-1">
+    <i class="fab fa-instagram"></i>
+  </a>
+  <a href="#" class="btn btn-outline-secondary btn-sm">
+    <i class="fas fa-link"></i>
+  </a>
+</div>
 {% endblock %}
 
 <!-- Beginning of Body -->
@@ -86,6 +105,18 @@
 		<button type="submit" class="btn btn-primary">Comment</button>
 		</div>
 		</form>
+
+<script>
+function copyShareLink() {
+    const url = window.location.href;
+    navigator.clipboard.writeText(url).then(() => {
+        alert("Link copied to clipboard!");
+    }).catch(err => {
+        alert("Unable to generate share link. Please try again later.");
+        console.error("Clipboard error:", err);
+    });
+}
+</script>
 		
 
 {% endblock %}

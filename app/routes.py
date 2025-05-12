@@ -2,7 +2,7 @@
 from flask import Flask, render_template
 from datetime import datetime
 from app import myapp_obj, db
-from app.models import Recipe, Recipe_Ingredient, Recipe_Rating
+from app.models import Recipe, Recipe_Ingredient, Recipe_Rating, Recipe_Comment, Ingredient
 from app.forms import RatingsForm, CommentsForm
 
 # home page / recipe search page
@@ -31,7 +31,7 @@ def recipeX(id):
 	if cform.validate_on_submit(): # comments form validation / db submission
 		cmt_tmstp = str(datetime.now())
 		comment = Recipe_Comment(
-			comment_desc=form.comment_desc.data,
+            comment_desc=cform.comment_desc.data,
 			user_id=1,
 			recipe_id=id,
 			comment_tmstp=cmt_tmstp
@@ -158,4 +158,77 @@ def get_Ing_Descs(id):
 	ingredients = Recipe_Ingredient.query.all()
 	descs = []
 	recipe_ings = Recipe_Ingredient.query.filter(Recipe_Ingredient.recipe_id==id).all()
+      
+# Adding a Recipe
+@myapp_obj.route("/add-recipe", methods=["GET", "POST"])
+def add_recipe():
+    if request.method == "POST":
+        title = request.form["recipe_desc"]
+        recipe_type = request.form["recipe_type"]
+        servings = request.form["recipe_servings"]
+        instructions_raw = request.form["recipe_instructions"]
+        ingredients_raw = request.form["ingredients"]
+
+        # Save recipe to database
+        new_recipe = Recipe(
+            recipe_desc=title,
+            recipe_type=recipe_type,
+            recipe_servings=servings,
+            recipe_rating=0,  # default rating
+            recipe_insns=instructions_raw
+        )
+        db.session.add(new_recipe)
+        db.session.commit()
+
+        # Add ingredients
+        ingredients_lines = ingredients_raw.strip().split("\n")
+        for line in ingredients_lines:
+            parts = line.strip().split(" ", 2)
+            if len(parts) == 3:
+                qty, uom, name = parts
+            elif len(parts) == 2:
+                qty, name = parts
+                uom = "unit"
+            else:
+                continue  # skip malformed line
+
+            # Check if ingredient exists
+            ingredient = Ingredient.query.filter_by(ing_desc=name).first()
+            if not ingredient:
+                ingredient = Ingredient(ing_desc=name, ing_type="")
+                db.session.add(ingredient)
+                db.session.commit()
+
+            # Link recipe and ingredient
+            ri = Recipe_Ingredient(
+                recipe_id=new_recipe.recipe_id,
+                ing_id=ingredient.ing_id,
+                ing_qty=qty,
+                ing_uom=uom
+            )
+            db.session.add(ri)
+
+        db.session.commit()
+        return redirect(url_for("main"))
+
+    return render_template("add_recipe.html")
+
+#ediiting a recipe
+@myapp_obj.route("/edit-recipe/<int:id>", methods=["GET", "POST"])
+def edit_recipe(id):
+    recipe = Recipe.query.get_or_404(id)
+
+    if request.method == "POST":
+        recipe.recipe_desc = request.form["recipe_desc"]
+        recipe.recipe_type = request.form["recipe_type"]
+        recipe.recipe_servings = request.form["recipe_servings"]
+        recipe.recipe_insns = request.form["recipe_insns"]
+
+        db.session.commit()
+        return redirect(url_for("recipeX", id=recipe.recipe_id))
+
+    return render_template("edit_recipe.html", recipe=recipe)
+
+
+
 	

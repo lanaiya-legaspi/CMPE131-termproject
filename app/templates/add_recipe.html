@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<h1 class="text-center">Add a New Recipe</h1>
+{% endblock %}
+
+{% block content %}
+<form method="POST">
+    <label>Recipe Name:</label><br>
+    <input type="text" name="recipe_desc" required><br><br>
+
+    <label>Recipe Type:</label><br>
+    <input type="text" name="recipe_type"><br><br>
+
+    <label>Servings:</label><br>
+    <input type="number" name="recipe_servings" required><br><br>
+
+    <label>Ingredients (one per line, format: quantity unit name):</label><br>
+    <textarea name="ingredients" rows="5" cols="60" required></textarea><br><br>
+
+    <label>Instructions (step-by-step, one step per line):</label><br>
+    <textarea name="recipe_instructions" rows="6" cols="60" required></textarea><br><br>
+
+    <button type="submit">Submit Recipe</button>
+</form>
+{% endblock %}

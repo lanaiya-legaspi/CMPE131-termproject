@@ -7,6 +7,8 @@
 
 <!-- Bootstrap import-->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+<!-- Font Awesome for social media icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <!-- Beginning of Menu -->
 <nav class="navbar sticky-top bg-body-tertiary">
@@ -14,6 +16,7 @@
 <a class="navbar-brand" href="/">Recipes</a>
 <a class="navbar-brand" href="/grocery-list">My Grocery List</a>
 <a class="navbar-brand" href="/user">My Profile</a>
+<a class="navbar-brand" href="{{ url_for('add_recipe') }}">Add Recipe</a>
 {% if session.get("user") %}
     <a href="{{ url_for('logout') }}" class="nav-link">Logout</a>
 {% else %}
