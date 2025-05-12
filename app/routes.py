@@ -3,7 +3,10 @@ from flask import Flask, render_template
 from datetime import datetime
 from app import myapp_obj, db
 from app.models import Recipe, Recipe_Ingredient, Recipe_Rating, Ingredient, Recipe_Comment, Ingredient
-from app.forms import RatingsForm, CommentsForm, SearchForm
+from app.forms import RatingsForm, CommentsForm, SearchForm, RecipeForm
+from app.forms import RecipeForm
+from flask import request, redirect, url_for
+
 
 # home page / recipe search page
 @myapp_obj.route("/", methods=["GET","POST"])
@@ -24,56 +27,57 @@ def recipes():
 	return render_template("recipes.html")
 
 # recipe page
-@myapp_obj.route("/recipe-<id>", methods=['GET', 'POST'])
+@myapp_obj.route("/recipe/<id>", methods=['GET', 'POST'])
 def recipeX(id):
-	recipe = db.session.get(Recipe, id)
-	ing_descs = getIngDescs(id)
-	recipe_qtys = Recipe_Ingredient.query.filter(Recipe_Ingredient.recipe_id==id).all()
-	recipe_insns = parseInstructions(id)
-	
-	def parseInstructions(id):
-		# Placeholder implementation for parsing instructions
-		recipe = db.session.get(Recipe, id)
-		if recipe and recipe.instructions:
-			return recipe.instructions.split("\n")  # Assuming instructions are stored as newline-separated text
-		return []
-	recform = Recipe
-	rform = RatingsForm()
-	cform = CommentsForm()
 
-	if cform.validate_on_submit(): # comments form validation / db submission
-		cmt_tmstp = str(datetime.now())
-		comment = Recipe_Comment(
+    def parseInstructions(id):
+        recipe = db.session.get(Recipe, id)
+        if recipe and recipe.recipe_insns:
+            return recipe.recipe_insns.split("\n")
+        return []
+
+    recipe = db.session.get(Recipe, id)
+    ing_descs = getIngDescs(id)
+    recipe_qtys = Recipe_Ingredient.query.filter(Recipe_Ingredient.recipe_id==id).all()
+    recipe_insns = parseInstructions(id)
+
+    recform = Recipe
+    rform = RatingsForm()
+    cform = CommentsForm()
+
+    if cform.validate_on_submit(): # comments form validation / db submission
+        cmt_tmstp = str(datetime.now())
+        comment = Recipe_Comment(
             comment_desc=cform.comment_desc.data,
-			user_id=1,
-			recipe_id=id,
-			comment_tmstp=cmt_tmstp
-		)
-		db.session.add(comment)
-		db.session.commit()
-		print(f'Comment has been added!')
-		return redirect("/")
-	else:
-		print("Comments Form Error")
-	if rform.validate_on_submit(): # ratings form validation / db submission
-		recipe_rating = request.form["exampleRadios"]
-		recform.recipe_rating = calculate_overall_rating()
-		rating = Recipe_Rating(recipe_id=id, recipe_rating=recipe_rating)
-		db.session.add(rating)
-		db.session.commit()
-		recipe.recipe_rating = calculate_overall_rating()
-		db.session.commit()
-		return redirect("/recipe", recipe=recipe)
-	else:
-		print("Ratings Form Error")
-	return render_template(
-		"recipe.html",
-		recipe=recipe,
-		ing_descs=ing_descs,
-		qtys=recipe_qtys,
-		recipe_insns=recipe_insns,
-		cform=cform, rform=rform
-	)
+            user_id=1,
+            recipe_id=id,
+            comment_tmstp=cmt_tmstp
+        )
+        db.session.add(comment)
+        db.session.commit()
+        print(f'Comment has been added!')
+        return redirect("/")
+    else:
+        print("Comments Form Error")
+    if rform.validate_on_submit(): # ratings form validation / db submission
+        recipe_rating = request.form["exampleRadios"]
+        recform.recipe_rating = calculate_overall_rating()
+        rating = Recipe_Rating(recipe_id=id, recipe_rating=recipe_rating)
+        db.session.add(rating)
+        db.session.commit()
+        recipe.recipe_rating = calculate_overall_rating()
+        db.session.commit()
+        return redirect("/recipe", recipe=recipe)
+    else:
+        print("Ratings Form Error")
+    return render_template(
+        "recipe.html",
+        recipe=recipe,
+        ing_descs=ing_descs,
+        qtys=recipe_qtys,
+        recipe_insns=recipe_insns,
+        cform=cform, rform=rform
+    )
 
 def calculate_overall_rating(id):
 	rows = Recipe_Rating.query.filter(Recipe_Rating.recipe_id==id)
@@ -170,4 +174,38 @@ def logout():
 def getIngDescs(id):
 	descs = []
 	recipe_ings = Recipe_Ingredient.query.filter(Recipe_Ingredient.recipe_id==id).all()
+
+#adding a recipe
+@myapp_obj.route("/add-recipe", methods=["GET", "POST"])
+def add_recipe():
+    rform = RecipeForm()
+
+    if rform.validate_on_submit():
+        recipe = Recipe(
+            recipe_desc=rform.recipe_desc.data,
+            recipe_type=rform.recipe_type.data,
+            recipe_servings=rform.recipe_servings.data,
+            recipe_rating=rform.recipe_rating.data,
+            recipe_insns=rform.recipe_insns.data,
+        )
+        db.session.add(recipe)
+        db.session.commit()
+        print("New recipe added!")
+        return redirect(url_for("recipes"))  # redirect to recipe list
+
+    return render_template("add_recipe.html", rform=rform)
+
+#editing a recipe
+@myapp_obj.route("/edit-recipe/<int:id>", methods=["GET", "POST"])
+def edit_recipe(id):
+    recipe = Recipe.query.get_or_404(id)
+    if request.method == "POST":
+        recipe.recipe_desc = request.form["recipe_desc"]
+        recipe.recipe_type = request.form["recipe_type"]
+        recipe.recipe_servings = request.form["recipe_servings"]
+        recipe.recipe_insns = request.form["recipe_insns"]
+        db.session.commit()
+        return redirect(url_for("recipeX", id=recipe.recipe_id))
+    return render_template("edit_recipe.html", recipe=recipe)
+
 	

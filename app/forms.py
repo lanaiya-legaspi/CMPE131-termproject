@@ -1,22 +1,27 @@
-#imports
+# imports
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, validators, HiddenField, IntegerField
 
-#class to validate anad handle recipe information
+# class to validate and handle recipe information
 class RecipeForm(FlaskForm):
-	recipe_id = HiddenField()
-	recipe_desc = StringField('RECIPE DESCRIPTION', [validators.DataRequired()])
-	recipe_type = StringField('Recipe Type', [validators.DataRequired()])
-	recipe_servings = IntegerField('Recipe Servings', [validators.DataRequired()])
-	recipe_rating = IntegerField('Recipe Rating', [validators.Length(min=1, max=1)])
-	recipe_insns = StringField('RECIPE INSTRUCTIONS', [validators.DataRequired()])
+    recipe_id = HiddenField()
+    recipe_desc = StringField('RECIPE DESCRIPTION', [validators.DataRequired()])
+    recipe_type = StringField('Recipe Type', [validators.DataRequired()])
+    recipe_servings = IntegerField('Recipe Servings', [validators.DataRequired()])
+    recipe_rating = IntegerField('Recipe Rating', [validators.Length(min=1, max=1)])
+    recipe_insns = StringField('RECIPE INSTRUCTIONS', [validators.DataRequired()])
 
-#class to handle the comments form section
+# class to handle the comments form section
 class CommentsForm(FlaskForm):
-	comment_id = HiddenField()
-	comment_desc = StringField('COMMENT', [validators.DataRequired()])
-	submit = SubmitField('Comment')
+    comment_id = HiddenField()
+    comment_desc = StringField('COMMENT', [validators.DataRequired()])
+    submit = SubmitField('Comment')
 
-#class to handle the ratings form section
+# class to handle the ratings form section
 class RatingsForm(FlaskForm):
-	rating_id = HiddenField()
+    rating_id = HiddenField()
+
+# class to handle the search bar (added to fix import error)
+class SearchForm(FlaskForm):
+    query = StringField('Search', [validators.DataRequired()])
+
