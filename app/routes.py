@@ -2,7 +2,7 @@
 from flask import Flask, render_template
 from datetime import datetime
 from app import myapp_obj, db
-from app.models import Recipe, Recipe_Ingredient
+from app.models import Recipe, Recipe_Ingredient, Recipe_Rating
 from app.forms import RatingsForm, CommentsForm
 
 # home page / recipe search page
@@ -18,14 +18,16 @@ def recipes():
 	return render_template("recipes.html")
 
 # recipe page
-@myapp_obj.route("/recipe-<id>")
+@myapp_obj.route("/recipe-<id>", methods=['GET', 'POST'])
 def recipeX(id):
 	recipe = db.session.get(Recipe, id)
 	ing_descs = get_Ing_Descs(id)
 	recipe_qtys = Recipe_Ingredient.query.filter(Recipe_Ingredient.recipe_id==id).all()
 	recipe_insns = ['step1', 'step2', 'step3'] # insns to be parsed soon
+	recform = Recipe
 	rform = RatingsForm()
 	cform = CommentsForm()
+
 	if cform.validate_on_submit(): # comments form validation / db submission
 		cmt_tmstp = str(datetime.now())
 		comment = Recipe_Comment(
@@ -41,7 +43,14 @@ def recipeX(id):
 	else:
 		print("Comments Form Error")
 	if rform.validate_on_submit(): # ratings form validation / db submission
-		return redirect("/")
+		recipe_rating = request.form["exampleRadios"]
+		recform.recipe_rating = calculate_overall_rating()
+		rating = Recipe_Rating(recipe_id=id, recipe_rating=recipe_rating)
+		db.session.add(rating)
+		db.session.commit()
+		recipe.recipe_rating = calculate_overall_rating()
+		db.session.commit()
+		return redirect("/recipe", recipe=recipe)
 	else:
 		print("Ratings Form Error")
 	return render_template(
@@ -52,6 +61,10 @@ def recipeX(id):
 		recipe_insns=recipe_insns,
 		cform=cform, rform=rform
 	)
+
+def calculate_overall_rating(id):
+	rows = Recipe_Rating.query.filter(Recipe_Rating.recipe_id==id)
+	return 5
 
 # my grocery list page
 @myapp_obj.route("/grocery-list")

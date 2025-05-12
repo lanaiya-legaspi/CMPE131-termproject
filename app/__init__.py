@@ -12,10 +12,9 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 #SQLAlchemy required setup
 myapp_obj.config.from_mapping(
 	SECRET_KEY = 'you-will-never-guess',
-	SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'app.db')
+	SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'app.db'),
+	SQLALCHEMY_TRACK_MODIFICATIONS = False
 )
-
-myapp_obj.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 #create database object
 db = SQLAlchemy(myapp_obj)

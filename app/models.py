@@ -59,3 +59,6 @@ class Recipe_Rating(db.Model):
 	user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
 	recipe_id = db.Column(db.Integer, db.ForeignKey('recipes.recipe_id'))
 	recipe_rating = db.Column(db.Integer)
+
+	def __repr__(self):
+		return f"Rating Id : {self.recipe_id}, Recipe Id : {self.recipe_id}, Recipe Rating : {self.recipe_rating}"
