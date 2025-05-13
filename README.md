@@ -2,18 +2,21 @@
 - Gerardo Robles (@Gerardorobles8)
 - Lanaiya Wu (@lanaiya-legaspi)
 
-# Functional Requirments Implemented By 4.25.2025
-## Gerardo Robles 1-3
+# Functional Requirments
+## Gerardo Robles 1-5
 1. User Registration
 2. User Login
 3. User Log out
 4. Create Recipe
 5. Edit Recipe
-6. Share Recipe
-## Lanaiya Wu 6-8
-7. View Recipe
+DIY. Share Recipe
+## Lanaiya Wu 6-10
+6. View Recipe
+7. Search Recipe
 8. Rate Recipe
 9. Comment Recipe
+10. View User Profile
+DIY. View Grocery List
 
 # Ethical Implications:
 
