@@ -33,7 +33,7 @@ def recipeX(id):
     def parseInstructions(id):
         recipe = db.session.get(Recipe, id)
         if recipe and recipe.recipe_insns:
-            return recipe.recipe_insns.split("\n")
+            return recipe.recipe_insns.split(".")
         return []
 
     recipe = db.session.get(Recipe, id)
@@ -79,8 +79,14 @@ def recipeX(id):
         cform=cform, rform=rform
     )
 
+def getIngDescs(id):
+	descs = []
+	recing = Ingredient.query.filter_by(Recipe_Ingredient.recipe_id==id).first()
+	for row in recing:
+		descs.append(row.ing_desc)
+	return descs
+
 def calculate_overall_rating(id):
-	rows = Recipe_Rating.query.filter(Recipe_Rating.recipe_id==id)
 	return 5
 
 # my grocery list page
@@ -167,14 +173,6 @@ def logout():
     return redirect(url_for("login"))
 
 
-
-
-
-# routing definitions
-def getIngDescs(id):
-	descs = []
-	recipe_ings = Recipe_Ingredient.query.filter(Recipe_Ingredient.recipe_id==id).all()
-
 #adding a recipe
 @myapp_obj.route("/add-recipe", methods=["GET", "POST"])
 def add_recipe():
@@ -207,5 +205,3 @@ def edit_recipe(id):
         db.session.commit()
         return redirect(url_for("recipeX", id=recipe.recipe_id))
     return render_template("edit_recipe.html", recipe=recipe)
-
-	
