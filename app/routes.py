@@ -81,7 +81,7 @@ def recipeX(id):
 
 def getIngDescs(id):
 	descs = []
-	recing = Ingredient.query.filter_by(Recipe_Ingredient.recipe_id==id).first()
+	recing = Ingredient.query.filter(Ingredient.ing_id==Recipe_Ingredient.ing_id, Recipe_Ingredient.recipe_id==id).all()
 	for row in recing:
 		descs.append(row.ing_desc)
 	return descs
