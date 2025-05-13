@@ -33,8 +33,10 @@ Engineering solutions can have a real impact on global, economic, environmental,
 2. Copy the link and navigate to a Linux terminal
 3. Enter the command "git clone [link]".
 4. Login with your Github username and token.
-5. Once the repository has been cloned, step into the "CMPE131-termproject" folder.
-6. Enter the command to verify you are in the same folder as the file "run.py"
+5. Once the repository has been cloned, step into the "CMPE131-termproject/app" folder.
+6. Type "source venv/bin/activate" to activate the already installed venv folder.
+7. Navigate to the parent directory "CMPE131-termproject" folder.
+8. Enter the command "ls" to verify you are in the same folder as the file "run.py"
 7. Enter the command "python3 run.py". The development server should start running.
 8. Navigate to a browser such as Chrome and type "http://127.0.0.1:5000/".
 9. The website should now be running locally in the browser.
