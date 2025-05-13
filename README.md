@@ -3,19 +3,19 @@
 - Lanaiya Wu (@lanaiya-legaspi)
 
 # Functional Requirments
-## Gerardo Robles 1-5
+## Gerardo Robles 1-5 + DIY
 1. User Registration
 2. User Login
 3. User Log out
 4. Create Recipe
-5. Edit Recipe
+5. Edit Recipe  
 DIY. Share Recipe
-## Lanaiya Wu 6-10
+## Lanaiya Wu 6-10 + DIY
 6. View Recipe
 7. Search Recipe
 8. Rate Recipe
 9. Comment Recipe
-10. View User Profile
+10. View User Profile  
 DIY. View Grocery List
 
 # Ethical Implications:
