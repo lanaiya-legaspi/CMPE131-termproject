@@ -2,6 +2,9 @@
 - Gerardo Robles (@Gerardorobles8)
 - Lanaiya Wu (@lanaiya-legaspi)
 
+# Link to Project Presentation Recording
+[https://drive.google.com/file/d/18haW8wbbxPP2mhe9f7cMJfoH2buORJei/view?usp=sharing]
+
 # Functional Requirments
 ## Gerardo Robles 1-5 + DIY
 1. User Registration
