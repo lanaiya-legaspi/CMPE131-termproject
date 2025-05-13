@@ -7,10 +7,13 @@
 1. User Registration
 2. User Login
 3. User Log out
+4. Create Recipe
+5. Edit Recipe
+6. Share Recipe
 ## Lanaiya Wu 6-8
-6. View Recipe
-7. Rate Recipe
-8. Comment Recipe
+7. View Recipe
+8. Rate Recipe
+9. Comment Recipe
 
 # Ethical Implications:
 
